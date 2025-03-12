@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import ProductDetails from "@/components/ProductDetails";
 
 export const dynamicParams = true;
@@ -38,9 +37,7 @@ export default async function Page({ params }: { params: { sku: string } }) {
   return (
     <div>
       <h1>Product SKU: {params.sku}</h1>
-      <Suspense fallback={<p>Loading product details...</p>}>
-        <ProductDetails fastData={fastData} slowData={slowData} mediumData={mediumData} verySlowData={verySlowData} />
-      </Suspense>
+      <ProductDetails fastData={fastData} slowData={slowData} mediumData={mediumData} verySlowData={verySlowData} />
     </div>
   );
 }
