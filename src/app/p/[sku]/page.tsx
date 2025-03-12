@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import ProductDetails from "@/components/ProductDetails";
 
+export const dynamicParams = true;
 export const revalidate = 300; // Enable ISR with 300 seconds revalidation
 export const dynamic = "force-static"; // Ensure ISR instead of full static generation
 
