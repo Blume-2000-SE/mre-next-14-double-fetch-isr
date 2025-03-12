@@ -5,6 +5,7 @@ export const revalidate = 300; // Enable ISR with 300 seconds revalidation
 export const dynamic = "force-static"; // Ensure ISR instead of full static generation
 
 async function fetchFastData(sku: string) {
+  console.log("fetchFastData called with sku", sku);
   const res = await fetch(`https://jsonplaceholder.typicode.com/todos/1?sku=${sku}`, {
     next: { revalidate: false }
   });
@@ -12,6 +13,7 @@ async function fetchFastData(sku: string) {
 }
 
 async function fetchSlowData(sku: string) {
+  console.log("fetchSlowData called with sku", sku);
   await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate slow fetch
   const res = await fetch(`https://jsonplaceholder.typicode.com/todos/2?sku=${sku}`, {
     next: { revalidate: false }
@@ -21,6 +23,7 @@ async function fetchSlowData(sku: string) {
 
 
 async function fetchMediumData() {
+  console.log("fetchMediumData called");
   const res = await fetch("https://pokeapi.co/api/v2/pokemon/ditto", {
     next: { revalidate: false }
   });
@@ -28,6 +31,7 @@ async function fetchMediumData() {
 }
 
 async function fetchVerySlowData() {
+  console.log("fetchVerySlowData called");
   await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate very slow fetch
   const res = await fetch("https://dog.ceo/api/breeds/image/random", {
     next: { revalidate: false }
