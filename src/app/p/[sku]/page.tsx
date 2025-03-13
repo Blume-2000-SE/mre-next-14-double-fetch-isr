@@ -12,9 +12,8 @@ async function fetchFastData(sku: string) {
   return res.json();
 }
 
-async function fetchSlowData(sku: string) {
-  console.log("fetchSlowData called with sku", sku);
-  await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate slow fetch
+async function fetchTodo(sku: string) {
+  console.log("fetchTodo called with sku", sku);
   const res = await fetch(`https://jsonplaceholder.typicode.com/todos/2?sku=${sku}`, {
     next: { revalidate: false }
   });
@@ -22,8 +21,8 @@ async function fetchSlowData(sku: string) {
 }
 
 
-async function fetchMediumData() {
-  console.log("fetchMediumData called");
+async function fetchPokemon() {
+  console.log("fetchPokemon called");
   const res = await fetch("https://pokeapi.co/api/v2/pokemon/ditto", {
     next: { revalidate: false }
   });
@@ -42,8 +41,8 @@ async function fetchVerySlowData() {
 export default async function Page({ params }: { params: { sku: string } }) {
   const { sku } = params;
   const fastData = await fetchFastData(sku);
-  const slowData = await fetchSlowData(sku);
-  const mediumData = await fetchMediumData();
+  const slowData = await fetchTodo(sku);
+  const mediumData = await fetchPokemon();
   const verySlowData = await fetchVerySlowData();
 
   return (
